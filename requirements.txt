@@ -1,0 +1,5 @@
+cv2 == 4.8.1.78
+imageio
+numpy
+uuid
+Pillow == 10.1.0
