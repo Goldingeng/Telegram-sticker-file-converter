@@ -11,4 +11,4 @@ def static_sticker(src_folder, result_folder):
         img = Image.open(os.path.join(src_folder, filename))
         img = img.resize(config.desired_size, Image.LANCZOS)
         img.save(os.path.join(result_folder, generate_random_filename() + '.webp'), 'webp')
-    print("Завершено!")
+    print("Completed!")
