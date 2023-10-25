@@ -3,7 +3,7 @@ from datetime import datetime
 from src.utils import animated_sticker, static_sticker
 import config
 
-def main():
+def main(): 
     src_folder = "src/data"
     result_folder = "src\\result" 
     today = datetime.now().strftime('%Y%m%d')
@@ -40,13 +40,32 @@ def main():
     else:
         animated_sticker.animated_sticker(src_folder, new_folder_path)
 
+    archive_folder = os.path.join("src", "archive", os.path.basename(new_folder_path))
+
+    try:
+        os.makedirs(archive_folder, exist_ok=True)
+    except Exception as e:
+        print(f"Error creating archive folder: {e}")
+    else:
+        try:
+            for filename in os.listdir(src_folder):
+                src_file = os.path.join(src_folder, filename)
+                dst_file = os.path.join(archive_folder, filename)
+                os.rename(src_file, dst_file)
+            
+           
+            for filename in os.listdir(src_folder):
+                file_path = os.path.join(src_folder, filename)
+                try:
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
+                    elif os.path.isdir(file_path):
+                        os.rmdir(file_path)
+                except Exception as e:
+                    print(f"Error deleting {file_path}: {e}")
+
+        except Exception as e:
+            print(f"Error moving files to archive: {e}")
+
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
