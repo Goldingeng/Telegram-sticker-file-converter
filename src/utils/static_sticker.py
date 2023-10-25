@@ -1,9 +1,6 @@
 from PIL import Image
 import os
-import uuid
-
-def generate_random_filename():
-    return str(uuid.uuid4())[:8]
+from config import generate_random_filename
 
 def resize_image(image, max_size):
     width, height = image.size
@@ -26,5 +23,3 @@ def static_sticker(src_folder, result_folder, max_size=512):
         img = resize_image(img, max_size)
         img.save(os.path.join(result_folder, generate_random_filename() + '.png'), 'png')
     print("Completed!")
-
-

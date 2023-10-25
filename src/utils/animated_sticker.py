@@ -2,10 +2,7 @@ import cv2
 import os
 import imageio
 import numpy as np
-import uuid
-
-def generate_random_filename():
-    return str(uuid.uuid4())[:8]
+from config import generate_random_filename
 
 def crop_center(frame, size):
     height, width, _ = frame.shape
@@ -26,7 +23,7 @@ def adjust_video_parameters(video, target_duration=3.0, target_fps=30):
     return video, original_duration, original_fps
 
 def animated_sticker(src_folder, result_folder, sticker_size=(512, 512), target_duration=3.0, target_fps=15):
-    input_files = [os.path.join(src_folder, f) for f in os.listdir(src_folder) if f.lower().endswith(('.webm', ".webp", '.mp4', '.avi', '.mkv', '.gif'))]
+    input_files = [os.path.join(src_folder, f) for f in os.listdir(src_folder) if f.lower().endswith(('.webm', '.mp4', '.avi', '.mkv', '.gif'))]
     if not os.path.exists(result_folder):
         os.makedirs(result_folder)
 
